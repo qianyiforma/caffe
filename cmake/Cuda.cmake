@@ -2,10 +2,25 @@ if(CPU_ONLY)
   return()
 endif()
 
+# This list will be used for CUDA_ARCH = All option
+# Fermi (3.2 <= CUDA <= 8)
+set(FERMI "20 21(20)")
+# Kepler (CUDA >= 5)
+set(KEPLER "30 35 37")
+# Maxwell (CUDA >= 6)
+set(MAXWELL "50 52 53")
+# Pascal (CUDA >= 8)
+set(PASCAL "60 61 62")
+# Volta (CUDA >= 9)
+set(VOLTA "70") # set(VOLTA "70 71 72") # This crashes with CUDA 10
+# Turing (CUDA >= 10)
+set(TURING "75")
+
 # Known NVIDIA GPU achitectures Caffe can be compiled for.
 # This list will be used for CUDA_ARCH_NAME = All option
-set(Caffe_known_gpu_archs "30 35 50 52 60 61")
+#set(Caffe_known_gpu_archs "30 35 50 52 60 61")
 # set(Caffe_known_gpu_archs "20 21(20) 30 35 50 60 61")
+set(Caffe_known_gpu_archs "${KEPLER} ${MAXWELL} ${PASCAL} ${VOLTA} ${TURING}")
 
 ################################################################################################
 # A function for automatic detection of GPUs installed  (if autodetection is enabled)
